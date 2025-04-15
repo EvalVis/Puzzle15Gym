@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import gym
 import numpy as np
@@ -59,18 +59,19 @@ class Puzzle15Env(gym.Env):
         Reset the environment to a new puzzle.
         
         Returns:
-            The initial observation.
+            The initial observation and valid actions.
         """
         if self._initial_grid is None:
-            # First time initialization
             if self._custom_puzzle:
                 self._puzzle = Puzzle.from_string(self._custom_puzzle)
             else:
                 self._puzzle = Puzzle.from_dimensions(self._height, self._width)
         else:
             self._puzzle = Puzzle(self._initial_grid)
+
+        valid_actions = [i for i, direction in self._direction.items() if direction in self._puzzle.possible_moves()]
         
-        return self._get_observation(), {}
+        return self._get_observation(), {"valid_actions": valid_actions}
     
     def step(self, action):
         """
@@ -85,31 +86,25 @@ class Puzzle15Env(gym.Env):
             reward: The reward for taking the action.
             done: Whether the episode is done.
             truncated: Whether the episode was truncated.
-            info: Additional information.
+            info: Additional information including valid actions.
         """
-        if not self.is_action_valid(action):
-            return self._get_observation(), -2, False, False, {}
+        # Get valid actions
+        valid_actions = [i for i, direction in self._direction.items() if direction in self._puzzle.possible_moves()]
+        
+        # Check if action is valid
+        if action not in valid_actions:
+            return self._get_observation(), -2, False, False, {"valid_actions": valid_actions}
         
         self._puzzle.move(self._direction[action])
         
         done = self._puzzle.is_solved()
         reward = 0 if done else -1
         
-        return self._get_observation(), reward, done, False, {}
-    
+        # Get updated valid actions after the move
+        valid_actions = [i for i, direction in self._direction.items() if direction in self._puzzle.possible_moves()]\
+            if not done else []
         
-    def is_action_valid(self, action):
-        """
-        Check if the given action is valid in the current state.
-        
-        Args:
-            action: An integer representing the action to take.
-                   0: up, 1: right, 2: down, 3: left.
-        
-        Returns:
-            bool: True if the action is valid, False otherwise.
-        """
-        return self._direction[action] in self._puzzle.possible_moves()
+        return self._get_observation(), reward, done, False, {"valid_actions": valid_actions}
     
     def _get_observation(self):
         """
