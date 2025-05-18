@@ -2,7 +2,7 @@
 
 A Gym environment for the 15-puzzle game: https://en.wikipedia.org/wiki/15_puzzle.
 
-The blank space is represented by -1.
+The blank space is represented by `-1`.
 
 ## Usage
 
@@ -50,8 +50,8 @@ env_3x3.close()
 
 ## Environment Details
 
-- **Action Space**: Discrete(4) - 0: up, 1: right, 2: down, 3: left.
-- **Observation Space**: Box(-1, height*width-1, (height*width), int32).
-Contains unique values from -1 to (width * height - 1), excluding 0.
-- **Reward**: 1 if the puzzle is solved, 0 if not, -2 if invalid move.
-- **Done**: True if the puzzle is solved, False otherwise.
+- **Action Space**: Discrete(4) - `0`: up, `1`: right, `2`: down, `3`: left.
+- **Observation Space**: `Box(-1, height*width-1, (height*width), int32)`.
+Contains unique values from `-1` to (`width * height - 1`), excluding `0`.
+- **Reward**: `1` if the puzzle is solved, `0` if not, `-2` if invalid move.
+- **Done**: `True` if the puzzle is solved, `False` otherwise.
