@@ -1,73 +1,57 @@
 # Puzzle15Gym
 
-A Gym environment for the 15-puzzle game.
+A Gym environment for the 15-puzzle game: https://en.wikipedia.org/wiki/15_puzzle.
 
-## Description
-
-Puzzle15Gym is a custom OpenAI Gym environment for the 15-puzzle game. The environment allows reinforcement learning agents to solve the puzzle by moving tiles.
-
-## Installation
-
-```bash
-pip install .
-```
+The blank space is represented by -1.
 
 ## Usage
 
-### Using registered environments
+### Initiating the env via gym
 
 ```python
 import gym
-import Puzzle15Gym  # This automatically registers the environments
+import Puzzle15Gym
 
-# Create a 3x3 puzzle
-env_3x3 = gym.make('Puzzle3x3Random-v0')
+env_3x3_random = gym.make('Puzzle3x3Random-v0')
+env_3x3_fixed = gym.make('Puzzle3x3Fixed-v0')
 
-# Create a 4x4 puzzle (standard 15-puzzle)
-env_4x4 = gym.make('Puzzle4x4Random-v0')
+env_4x4_random = gym.make('Puzzle4x4Random-v0')
+env_4x4_fixed = gym.make('Puzzle4x4Fixed-v0')
 
-# Create a 5x5 puzzle
-env_5x5 = gym.make('Puzzle5x5Random-v0')
+env_5x5_random = gym.make('Puzzle5x5Random-v0')
+env_5x5_fixed = gym.make('Puzzle5x5Fixed-v0')
+```
+
+### Initiating the env directly
+
+```python
+from Puzzle15Gym import Puzzle15Env
+
+env_random = Puzzle15Env(height=4, width=4)
+env_random = Puzzle15Env(custom_puzzle="2 8 6|7 1 3|-1 5 4")
+```
+
+```python
+env_3x3_random = gym.make('Puzzle3x3Random-v0')
 
 # Reset the environment
 observation, info = env_3x3.reset()
 
 # Take a step
-action = env_3x3.action_space.sample()  # Random action
+action = env_3x3.action_space.sample()
 observation, reward, done, truncated, info = env_3x3.step(action)
 
-# Render the environment
+# Render the environment. The only render mode is 'human' which renders visual output.
 env_3x3.render()
 
 # Close the environment
 env_3x3.close()
 ```
 
-### Using the environment directly
-
-```python
-from Puzzle15Gym import Puzzle15Env
-
-# Create a custom-sized puzzle
-env = Puzzle15Env(height=4, width=4)
-
-# Reset the environment
-observation, info = env.reset()
-
-# Take a step
-action = env.action_space.sample()  # Random action
-observation, reward, done, truncated, info = env.step(action)
-
-# Render the environment
-env.render()
-
-# Close the environment
-env.close()
-```
-
 ## Environment Details
 
-- **Action Space**: Discrete(4) - 0: up, 1: right, 2: down, 3: left
-- **Observation Space**: Box(-1, height*width-1, (height*width,), int32) - Flattened grid of numbers
-- **Reward**: 1 if the puzzle is solved, 0 if not, -2 if invalid move
-- **Done**: True if the puzzle is solved, False otherwise
+- **Action Space**: Discrete(4) - 0: up, 1: right, 2: down, 3: left.
+- **Observation Space**: Box(-1, height*width-1, (height*width), int32).
+Contains unique values from -1 to (width * height - 1), excluding 0.
+- **Reward**: 1 if the puzzle is solved, 0 if not, -2 if invalid move.
+- **Done**: True if the puzzle is solved, False otherwise.

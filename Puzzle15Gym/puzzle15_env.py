@@ -34,7 +34,7 @@ class Puzzle15Env(gym.Env):
         self._width = width
         self._custom_puzzle = custom_puzzle
         self._puzzle = None
-        self._initial_grid = None  # Store the initial grid state
+        self._initial_grid = None
         self._direction = {
             0: 'up',
             1: 'right',
@@ -42,10 +42,9 @@ class Puzzle15Env(gym.Env):
             3: 'left'
         }
         
-        # Define action and observation spaces
-        self.action_space = spaces.Discrete(4)  # 0: up, 1: right, 2: down, 3: left
+        # 0: up, 1: right, 2: down, 3: left
+        self.action_space = spaces.Discrete(4)
         
-        # The observation space is a flattened grid of numbers
         self._observation_space = spaces.Box(
             low=-1, 
             high=height*width-1, 
