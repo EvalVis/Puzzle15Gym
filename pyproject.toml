@@ -1,6 +1,6 @@
 [project]
 name = "puzzle15Gym"
-version = "1.0.0"
+version = "1.0.1"
 description = "A custom AI Gym environment for the sliding block puzzle game"
 readme = "README.md"
 authors = [{name = "Evaldas Visockas", email = "developersediary@gmail.com"}]
@@ -10,7 +10,7 @@ dependencies = [
     "gym>=0.17.3",
     "numpy>=2.2.3",
     "matplotlib>=3.10.1",
-    "puzzle15 >= 1.0.0"
+    "puzzle15 >= 1.0.1"
 ]
 
 [project.urls]

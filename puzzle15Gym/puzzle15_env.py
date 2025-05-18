@@ -17,7 +17,7 @@ class Puzzle15Env(gym.Env):
     
     metadata = {'render.modes': ['human', 'rgb_array']}
     
-    def __init__(self, height=4, width=4, custom_puzzle=None):
+    def __init__(self, height=None, width=None, custom_puzzle=None):
         """
         Initialize the environment.
         
@@ -45,17 +45,17 @@ class Puzzle15Env(gym.Env):
         # 0: up, 1: right, 2: down, 3: left
         self.action_space = spaces.Discrete(4)
         
-        self._observation_space = spaces.Box(
-            low=-1, 
-            high=height*width-1, 
-            shape=(height*width,), 
-            dtype=np.int32
-        )
-        
         self._fig = None
         self._ax = None
         
         self.reset()
+        
+        self._observation_space = spaces.Box(
+            low=-1, 
+            high=self._height*self._width-1, 
+            shape=(self._height*self._width,), 
+            dtype=np.int32
+        )
 
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
         """
@@ -67,6 +67,9 @@ class Puzzle15Env(gym.Env):
         if self._initial_grid is None:
             if self._custom_puzzle:
                 self._puzzle = Puzzle.from_string(self._custom_puzzle)
+                self._initial_grid = self._puzzle.grid()
+                self._height = len(self._initial_grid)
+                self._width = len(self._initial_grid[0])
             else:
                 self._puzzle = Puzzle.from_dimensions(self._height, self._width)
         else:
@@ -116,7 +119,6 @@ class Puzzle15Env(gym.Env):
         Returns:
             A flattened numpy array representing the current state.
         """
-        # Flatten the grid
         flat_grid = [
             val 
             for row in self._puzzle.grid() 
