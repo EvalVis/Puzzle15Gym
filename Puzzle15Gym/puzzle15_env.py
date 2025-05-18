@@ -2,6 +2,7 @@ from typing import Optional, List
 
 import gym
 import numpy as np
+import matplotlib.pyplot as plt
 from gym import spaces
 from puzzle15.puzzle import Puzzle
 
@@ -51,6 +52,9 @@ class Puzzle15Env(gym.Env):
             shape=(height*width,), 
             dtype=np.int32
         )
+        
+        self.fig = None
+        self.ax = None
         
         self.reset()
 
@@ -126,17 +130,50 @@ class Puzzle15Env(gym.Env):
         Render the environment.
         
         Args:
-            mode: The rendering mode. 'human' for console output, 'rgb_array' for image.
-        
+            mode: The rendering mode. Only mode supported: 'human'.
+    
         Returns:
-            If mode is 'rgb_array', returns an RGB array. Otherwise, returns None.
+            Visual puzzle output.
         """
         if mode == 'human':
-            print(self._puzzle)
+            grid = self._puzzle.grid()
+            
+            if self.fig is None or self.ax is None:
+                self.fig, self.ax = plt.subplots(figsize=(6, 6))
+                plt.ion()
+                self.fig.show()
+            
+            self.ax.clear()
+            
+            for i in range(self._height + 1):
+                self.ax.axhline(i, color='black', lw=2)
+            for j in range(self._width + 1):
+                self.ax.axvline(j, color='black', lw=2)
+            
+            # Fill in the numbers
+            for i in range(self._height):
+                for j in range(self._width):
+                    val = grid[i][j]
+                    if val != -1:  # Skip the blank space
+                        self.ax.text(j + 0.5, self._height - i - 0.5, str(val), 
+                                fontsize=20, ha='center', va='center')
+            
+            self.ax.set_xlim(0, self._width)
+            self.ax.set_ylim(0, self._height)
+            self.ax.set_xticks([])
+            self.ax.set_yticks([])
+            self.ax.set_title('15-Puzzle')
+            
+            self.fig.canvas.draw()
+            self.fig.canvas.flush_events()
+            
             return None
         else:
             raise NotImplementedError(f"Rendering mode {mode} not implemented.")
         
     def close(self):
         """Clean up environment resources."""
-        pass 
+        if self.fig is not None:
+            plt.close(self.fig)
+            self.fig = None
+            self.ax = None 
