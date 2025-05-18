@@ -21,4 +21,8 @@ dependencies = [
 repository = "https://github.com/EvalVis/Puzzle15Gym"
 
 [tool.setuptools]
-packages = ["puzzle15Gym"] 
+packages = ["puzzle15Gym"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
