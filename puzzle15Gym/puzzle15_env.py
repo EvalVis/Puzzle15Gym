@@ -52,8 +52,8 @@ class Puzzle15Env(gym.Env):
             dtype=np.int32
         )
         
-        self.fig = None
-        self.ax = None
+        self._fig = None
+        self._ax = None
         
         self.reset()
 
@@ -137,34 +137,34 @@ class Puzzle15Env(gym.Env):
         if mode == 'human':
             grid = self._puzzle.grid()
             
-            if self.fig is None or self.ax is None:
-                self.fig, self.ax = plt.subplots(figsize=(6, 6))
+            if self._fig is None or self._ax is None:
+                self._fig, self._ax = plt.subplots(figsize=(6, 6))
                 plt.ion()
-                self.fig.show()
+                self._fig.show()
             
-            self.ax.clear()
+            self._ax.clear()
             
             for i in range(self._height + 1):
-                self.ax.axhline(i, color='black', lw=2)
+                self._ax.axhline(i, color='black', lw=2)
             for j in range(self._width + 1):
-                self.ax.axvline(j, color='black', lw=2)
+                self._ax.axvline(j, color='black', lw=2)
             
             # Fill in the numbers
             for i in range(self._height):
                 for j in range(self._width):
                     val = grid[i][j]
                     if val != -1:  # Skip the blank space
-                        self.ax.text(j + 0.5, self._height - i - 0.5, str(val), 
+                        self._ax.text(j + 0.5, self._height - i - 0.5, str(val), 
                                 fontsize=20, ha='center', va='center')
             
-            self.ax.set_xlim(0, self._width)
-            self.ax.set_ylim(0, self._height)
-            self.ax.set_xticks([])
-            self.ax.set_yticks([])
-            self.ax.set_title('15-Puzzle')
+            self._ax.set_xlim(0, self._width)
+            self._ax.set_ylim(0, self._height)
+            self._ax.set_xticks([])
+            self._ax.set_yticks([])
+            self._ax.set_title('15-Puzzle')
             
-            self.fig.canvas.draw()
-            self.fig.canvas.flush_events()
+            self._fig.canvas.draw()
+            self._fig.canvas.flush_events()
             
             return None
         else:
@@ -172,7 +172,7 @@ class Puzzle15Env(gym.Env):
         
     def close(self):
         """Clean up environment resources."""
-        if self.fig is not None:
-            plt.close(self.fig)
-            self.fig = None
-            self.ax = None 
+        if self._fig is not None:
+            plt.close(self._fig)
+            self._fig = None
+            self._ax = None 
