@@ -124,7 +124,7 @@ class Puzzle15Env(gym.Env):
         ]
         return np.array(flat_grid, dtype=np.int32)
     
-    def render(self, mode='human'):
+    def render(self, mode='human'):  # pragma: no cover
         """
         Render the environment.
         
