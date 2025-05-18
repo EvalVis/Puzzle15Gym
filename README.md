@@ -36,6 +36,8 @@ env_random = Puzzle15Env(height=4, width=4)
 env_random = Puzzle15Env(custom_puzzle="2 8 6|7 1 3|-1 5 4")
 ```
 
+### Making moves
+
 ```python
 env_3x3_random = gym.make('Puzzle3x3Random-v0')
 
