@@ -8,7 +8,7 @@ class TestPuzzle15Env(unittest.TestCase):
         # Use a known 3x3 puzzle state for testing
         # This is a specific configuration with the blank tile in the middle
         self.test_puzzle = "1 2 3|4 -1 5|6 7 8"
-        self.env = Puzzle15Env(height=3, width=3, custom_puzzle=self.test_puzzle)
+        self.env = Puzzle15Env(custom_puzzle=self.test_puzzle)
         self.initial_obs, _ = self.env.reset()
     
     
