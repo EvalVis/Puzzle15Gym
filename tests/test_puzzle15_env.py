@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from Puzzle15Gym.puzzle15_env import Puzzle15Env
+from puzzle15Gym.puzzle15_env import Puzzle15Env
 
 class TestPuzzle15Env(unittest.TestCase):
     def setUp(self):

@@ -10,7 +10,7 @@ The blank space is represented by `-1`.
 
 ```python
 import gym
-import Puzzle15Gym
+import puzzle15Gym
 
 env_3x3_random = gym.make('Puzzle3x3Random-v0')
 env_3x3_fixed = gym.make('Puzzle3x3Fixed-v0')
@@ -25,7 +25,7 @@ env_5x5_fixed = gym.make('Puzzle5x5Fixed-v0')
 ### Initiating the env directly
 
 ```python
-from Puzzle15Gym import Puzzle15Env
+from puzzle15Gym import Puzzle15Env
 
 env_random = Puzzle15Env(height=4, width=4)
 env_random = Puzzle15Env(custom_puzzle="2 8 6|7 1 3|-1 5 4")
