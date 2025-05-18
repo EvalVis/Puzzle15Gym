@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.urls]
-repository = "https://github.com/EvalVis/Puzzle15Gym"
+Repository = "https://github.com/EvalVis/Puzzle15Gym"
 
 [build-system]
 requires = ["setuptools>=42", "wheel"]

@@ -6,6 +6,8 @@ A Gym environment for the 15-puzzle game: https://en.wikipedia.org/wiki/15_puzzl
 
 The blank space is represented by `-1`.
 
+Library used: [![GitHub](https://img.shields.io/badge/GitHub-EvalVis/Puzzle15-black?style=flat&logo=github)](https://github.com/EvalVis/Puzzle15).
+
 ## Usage
 
 ### Initiating the env via gym
