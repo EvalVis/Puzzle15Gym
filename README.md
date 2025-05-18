@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/EvalVis/Puzzle15Gym/branch/main/graph/badge.svg)](https://codecov.io/gh/EvalVis/Puzzle15Gym)
 [![PyPI version](https://badge.fury.io/py/puzzle15Gym.svg)](https://pypi.org/project/puzzle15Gym/)
 
-A Gym environment for the 15-puzzle game: https://en.wikipedia.org/wiki/15_puzzle.
+A custom AI Gym environment for the 15-puzzle game: https://en.wikipedia.org/wiki/15_puzzle.
 
 The blank space is represented by `-1`.
 
