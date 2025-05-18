@@ -170,7 +170,7 @@ class Puzzle15Env(gym.Env):
         else:
             raise NotImplementedError(f"Rendering mode {mode} not implemented.")
         
-    def close(self):
+    def close(self):  # pragma: no cover
         """Clean up environment resources."""
         if self._fig is not None:
             plt.close(self._fig)
