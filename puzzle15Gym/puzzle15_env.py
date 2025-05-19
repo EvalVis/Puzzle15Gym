@@ -15,7 +15,7 @@ class Puzzle15Env(gym.Env):
     The action space is discrete with 4 possible actions: up, right, down, left.
     """
     
-    metadata = {'render.modes': ['human', 'rgb_array']}
+    metadata = {'render.modes': ['human']}
     
     def __init__(self, height=None, width=None, custom_puzzle=None):
         """
