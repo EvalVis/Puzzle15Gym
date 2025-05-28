@@ -15,7 +15,6 @@ Library used: [![GitHub](https://img.shields.io/badge/GitHub-EvalVis/Puzzle15-bl
 
 ```python
 import gym
-import puzzle15Gym
 
 env_3x3_random = gym.make('Puzzle3x3Random-v0')
 env_3x3_fixed = gym.make('Puzzle3x3Fixed-v0')
@@ -33,20 +32,25 @@ env_5x5_fixed = gym.make('Puzzle5x5Fixed-v0')
 from puzzle15Gym import Puzzle15Env
 
 env_random = Puzzle15Env(height=4, width=4)
-env_random = Puzzle15Env(custom_puzzle="2 8 6|7 1 3|-1 5 4")
+env_fixed = Puzzle15Env(custom_puzzle="2 8 6|7 1 3|-1 5 4")
 ```
 
 ### Making moves
 
 ```python
+import gym
+
 env_3x3_random = gym.make('Puzzle3x3Random-v0')
 
 # Reset the environment
 observation, info = env_3x3.reset()
 
-# Take a step
-action = env_3x3.action_space.sample()
-observation, reward, done, truncated, info = env_3x3.step(action)
+# Make a random valid move
+import random
+
+valid_actions = info["valid_actions"]
+random_action = random.choice(list(valid_actions))
+observation, reward, done, truncated, info = env_3x3.step(random_action)
 
 # Render the environment. The only render mode is 'human' which renders visual output.
 env_3x3.render()
