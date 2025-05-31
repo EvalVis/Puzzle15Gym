@@ -1,9 +1,9 @@
 from typing import Optional
 
-import gym
+import gymnasium as gym
 import numpy as np
 import matplotlib.pyplot as plt
-from gym import spaces
+from gymnasium import spaces
 from puzzle15.puzzle import Puzzle
 
 class Puzzle15Env(gym.Env):

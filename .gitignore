@@ -78,3 +78,5 @@ poetry.lock
 build/
 dist/
 *.egg-info/
+
+puzzle15Gym.egg-info/
