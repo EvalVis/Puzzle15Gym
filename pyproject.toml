@@ -1,6 +1,6 @@
 [project]
 name = "puzzle15Gym"
-version = "1.0.2"
+version = "1.0.3"
 description = "A custom AI Gym environment for the sliding block puzzle game"
 readme = "README.md"
 authors = [{name = "Evaldas Visockas", email = "developersediary@gmail.com"}]
